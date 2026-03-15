@@ -6,4 +6,4 @@ import io from 'socket.io-client'
   justifyContent: "center",
   alignItems: "center",
 };
-export const socket = io('http://localhost:5000')
+export const socket = io('https://multi-vendor-ecommerce-backend-vh2u.onrender.com')
