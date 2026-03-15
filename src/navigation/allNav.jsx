@@ -1,5 +1,5 @@
 import { AiOutlineDashboard, AiOutlineShoppingCart } from "react-icons/ai";
-import { BiCategory } from "react-icons/bi";
+import { BiCategory, BiSolidCoupon } from "react-icons/bi";
 import { FaUserTimes, FaUsers } from "react-icons/fa";
 import { MdPayment } from "react-icons/md";
 import { FaCodePullRequest } from "react-icons/fa6";
@@ -11,6 +11,7 @@ import { BsCartCheck } from "react-icons/bs";
 import { IoChatbubbles } from "react-icons/io5";
 import { BsFillChatQuoteFill } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
+import { FaList } from "react-icons/fa";
 
 export const allNav = [
   {
@@ -33,6 +34,20 @@ export const allNav = [
     icon: <BiCategory />,
     role: "admin",
     path: "/admin/dashboard/category",
+  },
+  {
+    id: 18,
+    title: "Coupons",
+    icon: <BiSolidCoupon />, 
+    role: "admin",
+    path: "/admin/dashboard/coupons",
+  },
+  {
+    id: 19, 
+    title: 'Blogs',
+    icon: <FaList />, 
+    role: 'admin',
+    path: '/admin/dashboard/blogs'
   },
   {
     id: 4,
@@ -89,13 +104,6 @@ export const allNav = [
     icon: <MdViewList />,
     role: "seller",
     path: "/seller/dashboard/products",
-  },
-  {
-    id: 12,
-    title: "Discount Product",
-    icon: <TbBasketDiscount />,
-    role: "seller",
-    path: "/seller/dashboard/discount-product",
   },
   {
     id: 13,

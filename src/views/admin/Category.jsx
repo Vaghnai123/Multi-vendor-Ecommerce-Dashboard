@@ -8,7 +8,7 @@ import { FaImage } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
 import { PropagateLoader } from "react-spinners";
 import { overrideStyle } from "../../utils/utils";
-import { categoryAdd, messageClear, get_category } from '../../store/Reducers/categoryReducer';
+import { categoryAdd, messageClear, get_category,updateCategory,deleteCategory } from '../../store/Reducers/categoryReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import Search from '../components/Search';
@@ -24,6 +24,8 @@ const Category = () => {
     const [parPage, setParPage] = useState(5);
     const [imageShow, setImage] = useState('')
     const [show, setShow] = useState(false);
+    const [isEdit, setIsEdit] = useState(false)
+    const [editId, setEditId] = useState(null)
      const [state, setState] = useState({
 
         name: '',
@@ -42,9 +44,15 @@ const Category = () => {
         }
     }
 
-    const add_category = (e) => {
+    const addOrUpdateCategory = (e) => {
         e.preventDefault()
-        dispatch(categoryAdd(state))
+        if (isEdit) {
+            dispatch(updateCategory({ id:editId, ...state }))
+        }else{
+            dispatch(categoryAdd(state))
+        }
+        
+        // console.log(state)
     }
 
      useEffect(() => {
@@ -76,6 +84,25 @@ const Category = () => {
         dispatch(get_category(obj))
 
     },[searchValue, currentPage,parPage])
+
+    /// Handle Edit Button 
+    const handleEdit = (category) => {
+        setState({
+            name: category.name,
+            image: category.image
+        })
+        setImage(category.image)
+        setEditId(category._id)
+        setIsEdit(true)
+        setShow(true)
+    }
+
+    const handleDelete = (id) => {
+        if (window.confirm('Are you sure to delete category?')) {
+            console.log("delete category id",id);
+            dispatch(deleteCategory(id));
+        }
+    }
 
     return (
         <div className="bg-gradient-to-br bg-[#cdcae9] min-h-screen px-4 lg:px-7 pt-6 font-sans">
@@ -120,10 +147,10 @@ const Category = () => {
                                             <td scope="row" className="py-4 px-6 font-semibold whitespace-nowrap text-slate-700">{d.name}</td>
                                             <td scope="row" className="py-4 px-6 font-medium whitespace-nowrap">
                                                 <div className="flex justify-start items-center gap-2">
-                                                    <Link to="#" className="p-2.5 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 hover:shadow-lg hover:scale-110 transition-all duration-300 active:scale-95">
+                                                    <Link onClick={() => handleEdit(d)} className="p-2.5 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 hover:shadow-lg hover:scale-110 transition-all duration-300 active:scale-95">
                                                         <TbEdit size={16} />
                                                     </Link>
-                                                    <Link to="#" className="p-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:shadow-lg hover:scale-110 transition-all duration-300 active:scale-95">
+                                                    <Link onClick={() => handleDelete(d._id)} className="p-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 hover:shadow-lg hover:scale-110 transition-all duration-300 active:scale-95">
                                                         <FaTrashCan size={14} />
                                                     </Link>
                                                 </div>
@@ -155,7 +182,7 @@ const Category = () => {
                                 </div>
                             </div>
 
-                            <form onSubmit={add_category}>
+                            <form onSubmit={addOrUpdateCategory}>
                                 <div className="flex flex-col w-full gap-2 mb-4">
                                     <label htmlFor="name" className="text-sm text-slate-700 font-medium">Category Name</label>
                                     <input value={state.name} onChange={(e)=>setState({...state,name : e.target.value})} className="px-4 py-2 bg-white border border-slate-300 rounded-lg text-slate-700 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all" type="text" id="name" name="category_name" placeholder="Category Name" />

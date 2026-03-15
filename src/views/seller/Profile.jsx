@@ -7,6 +7,7 @@ import { profile_image_upload,profile_info_add, messageClear } from '../../store
 import toast from 'react-hot-toast';
 import { PropagateLoader } from 'react-spinners';
 import { overrideStyle } from '../../utils/utils'; 
+import { create_stripe_connect_account } from '../../store/Reducers/sellerReducer';
 const Profile = () => {
     const dispatch = useDispatch()
     const { userInfo,loader,successMessage } = useSelector(state => state.auth)
@@ -25,8 +26,6 @@ const Profile = () => {
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[successMessage])
-
-    const status = "active"
 
      const add_image = (e) => {
         if (e.target.files.length > 0) { 
@@ -56,7 +55,7 @@ const Profile = () => {
                     <div className='w-full p-2 bg-white rounded-2xl shadow-xl border border-slate-200/50 text-slate-700'>
             <div className='flex justify-center items-center py-3'>
                 {
-                    userInfo?.image ? <label htmlFor="img" className='h-[160px] w-[290px] relative p-3 cursor-pointer overflow-hidden'>
+                    userInfo?.image ? <label htmlFor="img" className='h-[220px] w-[220px] relative p-3 cursor-pointer object-contain '>
                         <img src={userInfo?.image} alt="" />
                         {
                         loader && <div className='bg-slate-600 absolute left-0 top-0 w-full h-full opacity-70 flex justify-center items-center z-20'>
@@ -107,7 +106,7 @@ const Profile = () => {
                                 <span className='font-semibold text-slate-600'>Payment Account :</span>
                                 <p>
                                     {
-                                        status === "active" ? <span className='bg-red-500 text-white text-xs cursor-pointer font-semibold px-3 py-1 rounded-full shadow-md hover:bg-green-600 transition-all'>{userInfo.payment}</span> : <span className='bg-indigo-500 text-white text-xs cursor-pointer font-semibold px-3 py-1 rounded-full shadow-md hover:bg-indigo-600 transition-all'>Click Active</span>
+                                        userInfo.payment === "active" ? <span className='bg-red-500 text-white text-xs cursor-pointer font-semibold px-3 py-1 rounded-full shadow-md hover:bg-green-600 transition-all'>{userInfo.payment}</span> : <span onClick={()=> dispatch(create_stripe_connect_account())} className='bg-indigo-500 text-white text-xs cursor-pointer font-semibold px-3 py-1 rounded-full shadow-md hover:bg-indigo-600 transition-all'>Click Active</span>
                                     }
                                 </p>
                             </div>

@@ -1,8 +1,12 @@
 
 import React from "react";
 import { FaList } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 
 const Header = ({ showSidebar, setShowSidebar }) => {
+
+    const {userInfo } = useSelector(state => state.auth)
+
  return (
          <div className="w-full py-4 px-4 lg:px-7">
              <div className="ml-0 lg:ml-[260px] rounded-2xl h-[65px] flex justify-between items-center bg-[#cdcae9]  px-5 transition-all duration-300">
@@ -21,10 +25,14 @@ const Header = ({ showSidebar, setShowSidebar }) => {
                      <div className="flex justify-center items-center">
                          <div className="flex justify-center items-center gap-4">
                              <div className="flex justify-center items-center flex-col text-end">
-                                 <h2 className="text-md font-bold text-slate-800">Vaghani Jil</h2>
-                                     <span className="text-[14px] w-full font-normal text-slate-500">Admin</span>
+                                 <h2 className="text-md font-bold text-slate-800">{ userInfo.name }</h2>
+                                     <span className="text-[15px] text-slate-800 w-full font-medium ">{ userInfo.role }</span>
                              </div>
-                                <div> <img className="w-[45px] h-[45px] rounded-full object-cover ring-2 ring-indigo-500 shadow-md"  src="/public/image/admin.png"alt="Admin Profile" /> </div>
+                                <div> 
+                                {
+                                userInfo.role === 'admin' ? <img className="w-[45px] h-[45px] rounded-full object-contain ring-2 ring-indigo-500 shadow-md"  src="/public/image/admin.png"alt="Admin Profile" /> : <img className='w-[45px] h-[45px] rounded-full overflow-hidden' src={userInfo.image} alt="" />
+                                }
+                                </div>
                         </div>
                     </div>
                 </div>

@@ -9,6 +9,10 @@ const SellerRequest = lazy(() => import("../../views/admin/SellerRequest"));
 const SellerDetails = lazy(() => import("../../views/admin/SellerDetails")); 
 const ChatSeller = lazy(() => import("../../views/admin/ChatSeller"));   
 const OrderDetails = lazy(()=> import('../../views/admin/OrderDetails'));  
+const Coupons = lazy(() => import("../../views/admin/Coupons"));
+const Blogs = lazy(() => import('../../views/admin/Blogs'));
+const AddBlog = lazy(() => import('../../views/admin/AddBlog'));
+const EditBlog = lazy(() => import('../../views/admin/EditBlog'));
 
 export const adminRoutes = [
   {
@@ -24,6 +28,11 @@ export const adminRoutes = [
   {
     path: "/admin/dashboard/category",
     element: <Category />,
+    role: "admin",
+  },
+  {
+    path: "/admin/dashboard/coupons",
+    element: <Coupons />,
     role: "admin",
   },
   {
@@ -57,8 +66,28 @@ export const adminRoutes = [
     role: "admin",
   },
   {
+        path: 'admin/dashboard/chat-sellers/:sellerId',
+        element : <ChatSeller/> ,
+        role : 'admin'
+  },
+  {
         path: 'admin/dashboard/order/details/:orderId',
         element : <OrderDetails/> ,
         role : 'admin'
-    },
+  },
+  {
+    path: 'admin/dashboard/blogs',
+    element: <Blogs />,
+    role: 'admin'
+  },
+  {
+    path: 'admin/dashboard/add-blog',
+    element: <AddBlog />,
+    role: 'admin'
+  },
+  {
+    path: 'admin/dashboard/edit-blog/:blogId',
+    element: <EditBlog />,
+    role: 'admin'
+  }
 ];

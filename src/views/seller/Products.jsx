@@ -8,7 +8,7 @@ import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import { get_products } from '../../store/Reducers/productReducer';
-
+import { LuImageMinus } from "react-icons/lu";
 
 
 const Products = () => {
@@ -66,7 +66,7 @@ const Products = () => {
                                                 <span className='px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-semibold'>{d.category}</span>
                                             </td>
                                             <td scope="row" className="py-4 px-6 font-medium whitespace-nowrap text-slate-600">{d.brand}</td>
-                                            <td scope="row" className="py-4 px-6 font-bold whitespace-nowrap text-green-600">${d.price}</td>
+                                            <td scope="row" className="py-4 px-6 font-bold whitespace-nowrap text-green-600">₹{d.price}</td>
                                             <td scope="row" className="py-4 px-6 font-medium whitespace-nowrap text-slate-600">
                                                 <span className='px-2 py-1 bg-orange-100 text-orange-700 rounded-md text-xs font-semibold'>
                                                     {
@@ -80,6 +80,7 @@ const Products = () => {
                                                     <Link to={`/seller/dashboard/edit-product/${d._id}`} className="p-2.5 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 hover:shadow-lg hover:scale-110 transition-all duration-300 active:scale-95">
                                                         <TbEdit size={16} />
                                                     </Link>
+                                                    <Link to={`/seller/dashboard/add-banner/${d._id}`} className='p-2.5 bg-sky-500 text-white rounded-lg hover:bg-sky-600 hover:shadow-lg hover:scale-110 transition-all duration-300 active:scale-95'> <LuImageMinus /> </Link> 
                                                     <Link to="#" className="p-2.5 bg-green-500 text-white rounded-lg hover:bg-green-600 hover:shadow-lg hover:scale-110 transition-all duration-300 active:scale-95">
                                                         <FaEye size={16} />
                                                     </Link>
