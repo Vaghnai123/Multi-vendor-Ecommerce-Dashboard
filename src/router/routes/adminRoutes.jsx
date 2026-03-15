@@ -16,12 +16,12 @@ const EditBlog = lazy(() => import('../../views/admin/EditBlog'));
 
 export const adminRoutes = [
   {
-    path: "admin/dashboard",
+    path: "/admin/dashboard",
     element: <AdminDashboard />,
     role: "admin",
   },
   {
-    path: "admin/dashboard/orders",
+    path: "/admin/dashboard/orders",
     element: <Orders />,
     role: "admin",
   },
@@ -56,7 +56,7 @@ export const adminRoutes = [
     role: "admin",
   },
   {
-    path: "admin/dashboard/seller/details/:sellerId",
+    path: "/admin/dashboard/seller/details/:sellerId",
     element: <SellerDetails />,
     role: "admin",
   },
@@ -66,27 +66,27 @@ export const adminRoutes = [
     role: "admin",
   },
   {
-        path: 'admin/dashboard/chat-sellers/:sellerId',
+        path: '/admin/dashboard/chat-sellers/:sellerId',
         element : <ChatSeller/> ,
         role : 'admin'
   },
   {
-        path: 'admin/dashboard/order/details/:orderId',
+        path: '/admin/dashboard/order/details/:orderId',
         element : <OrderDetails/> ,
         role : 'admin'
   },
   {
-    path: 'admin/dashboard/blogs',
+    path: '/admin/dashboard/blogs',
     element: <Blogs />,
     role: 'admin'
   },
   {
-    path: 'admin/dashboard/add-blog',
+    path: '/admin/dashboard/add-blog',
     element: <AddBlog />,
     role: 'admin'
   },
   {
-    path: 'admin/dashboard/edit-blog/:blogId',
+    path: '/admin/dashboard/edit-blog/:blogId',
     element: <EditBlog />,
     role: 'admin'
   }
